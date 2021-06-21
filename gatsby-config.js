@@ -1,12 +1,13 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'My super blog',
-    description: 'Gatsby blog with Strapi',
-    author: 'Strapi team'
+    title: 'Welcome to the CMS POC-Add content in Strapi to see here',
+    description: 'Add more content in the  Strapi admin panel',
+    author: 'Sonu'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-material-ui',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -39,6 +40,6 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
-    'gatsby-plugin-image'
+    'gatsby-plugin-image',
   ],
 }
