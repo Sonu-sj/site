@@ -3,13 +3,22 @@ import { Link, graphql } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from '../components/layout'
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import * as presets from '@theme-ui/presets'
+import { jsx, Themed, components,Box,Card,Text,Heading,Image} from 'theme-ui'
+import { ThemeContext } from '@emotion/react'
+import {
+  TypeScale,
+  TypeStyle,
+  HeadingStyle,
+  ColorPalette,
+  FontFamily,
+} from '@theme-ui/style-guide'
 
 const useStyles = makeStyles({
   root: {
@@ -41,30 +50,41 @@ const useStyles = makeStyles({
 // )
 
 const IndexPage = function({ data }){
+  console.log(data);
+  const document = data.strapiFleetOwners;
+  console.log(document)
   const classes = useStyles()
   return(
   <Layout>
-    <div>
-    {data.allStrapiArticle.edges.map(document => (
+    <ThemeContext.Provider value={presets[document.Theme]}>
+    <Themed.root sx={{ bg: 'background'}}>
+    <Box sx={{
+      color: 'primary',
+      bg: 'background',
+      padding:'10px',
+      fontFamily: 'body !important',
+      // raw CSS value
+      boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
+    }}>
+
+      
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-        >
-        <GatsbyImage image={document.node.image.localFile.childImageSharp.gatsbyImageData} alt={'Reupload Image in Strapi'} />
-        </CardMedia>
+      <Image src={document.logoUrl} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {document.node.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-          {document.node.content}
-          </Typography>
+          <Heading>
+            {document.title}
+          </Heading>
+          <Text>
+          {document.content}
+          </Text>
         </CardContent>
       </CardActionArea>
     </Card>
-    ))}
-    </div>
+
+    </Box>
+    </Themed.root>
+        </ThemeContext.Provider>
   </Layout>
   )
 }
@@ -73,26 +93,14 @@ const IndexPage = function({ data }){
 export default IndexPage
 
 export const pageQuery = graphql`  
-  query IndexQuery {
-    allStrapiArticle {
-      edges {
-        node {
-          id
-          image {
-            localFile{
-            childImageSharp {
-               gatsbyImageData(
-                width: 200,
-                height:125
-        
-       )
-            }
-          }
-        }
-          title
-          content
-        }
+  query IndexQuery($title: String) {
+      strapiFleetOwners(
+        title: {eq:  $title }
+      ) {
+        title
+        content,
+        logoUrl,
+        Theme
       }
     }
-  }
 `
