@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 const IndexPage = function({ data }){
   console.log(data);
   const document = data.strapiFleetOwners;
-  console.log(document)
+  console.log(document.Theme)
   const classes = useStyles()
   return(
   <Layout>
