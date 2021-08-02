@@ -14,7 +14,7 @@ exports.onCreatePage = ({ page, actions }) => {
     }
     let siteTitle = hookData.title || 'Parveen Travels';
 
-
+    console.log("SITE TITLE",siteTitle);
     deletePage(page);
     createPage({
       ...page,
