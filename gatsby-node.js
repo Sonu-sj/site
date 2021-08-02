@@ -7,16 +7,19 @@
 // You can delete this file if you're not using it
 exports.onCreatePage = ({ page, actions }) => {
     const { createPage, deletePage } = actions;
-    console.log("from hook");
-    console.log(process.env.INCOMING_HOOK_BODY);
-    console.log(process.env);
-    console.log(process.env.title);
+    let hookData={}
+    
+    if(process.env.INCOMING_HOOK_BODY){
+      hookData = JSON.parse(process.env.INCOMING_HOOK_BODY)
+    }
+    let siteTitle = hookData.title || 'Parveen Travels';
+
 
     deletePage(page);
     createPage({
       ...page,
       context: {
-        title: 'Parveen Travels'
+        title: siteTitle
       }
     });
   };
