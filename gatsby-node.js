@@ -12,7 +12,7 @@ exports.onCreatePage = ({ page, actions }) => {
     if(process.env.INCOMING_HOOK_BODY){
       hookData = JSON.parse(process.env.INCOMING_HOOK_BODY)
     }
-    let siteTitle = hookData.title || 'Parveen Travels';
+    let siteTitle = hookData.title || 'Placeholder';
 
     console.log("SITE TITLE",siteTitle);
     deletePage(page);
