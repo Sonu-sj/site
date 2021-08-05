@@ -9,6 +9,7 @@
     "@material-ui/styles": "^4.11.4",
     "@theme-ui/presets": "^0.10.0",
     "@theme-ui/style-guide": "^0.10.0",
+    "axios": "^0.21.1",
     "gatsby": "^3.6.2",
     "gatsby-plugin-gatsby-cloud": "^2.6.1",
     "gatsby-plugin-image": "^1.6.0",
