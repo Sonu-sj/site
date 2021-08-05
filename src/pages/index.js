@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import * as presets from '@theme-ui/presets'
 import { jsx, Themed, components,Box,Card,Text,Heading,Image} from 'theme-ui'
 import { ThemeContext } from '@emotion/react'
+
 import {
   TypeScale,
   TypeStyle,
@@ -19,6 +20,7 @@ import {
   ColorPalette,
   FontFamily,
 } from '@theme-ui/style-guide'
+import Header from "../components/header"
 
 const useStyles = makeStyles({
   root: {
@@ -55,14 +57,23 @@ const IndexPage = function({ data }){
   console.log(document.Theme)
   const classes = useStyles()
   return(
-  <Layout>
-    <ThemeContext.Provider value={presets[document.Theme]}>
+    <ThemeContext.Provider value={presets[document.theme]}>
     <Themed.root sx={{ bg: 'background'}}>
+    <div>
+         <Box sx={{
+      color: 'dark',
+      bg: 'primary',
+      // raw CSS value
+      boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
+    }}>
+<Header siteTitle={ `Welcome to the ${document.title } Site-Add content in Strapi to see here`}/>
+    </Box>
+  <Layout>
+
     <Box sx={{
       color: 'primary',
       bg: 'background',
       padding:'10px',
-      fontFamily: 'body !important',
       // raw CSS value
       boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
     }}>
@@ -83,9 +94,11 @@ const IndexPage = function({ data }){
     </Card>
 
     </Box>
-    </Themed.root>
-        </ThemeContext.Provider>
+
   </Layout>
+  </div>
+  </Themed.root>
+  </ThemeContext.Provider>
   )
 }
 
