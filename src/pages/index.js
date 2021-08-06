@@ -57,7 +57,7 @@ const IndexPage = function({ data }){
   console.log(document.Theme)
   const classes = useStyles()
   return(
-    <ThemeContext.Provider value={presets[document.theme]}>
+    <ThemeContext.Provider value={presets[document.Theme]}>
     <Themed.root sx={{ bg: 'background'}}>
     <div>
          <Box sx={{
